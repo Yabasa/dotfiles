@@ -243,7 +243,7 @@
 ;                            (org-agenda-todo-ignore-with-date bh/hide-scheduled-and-waiting-next-tasks)
 ;                            (org-agenda-sorting-strategy
 ;                             '(priority-down category-keep))))
-                (tags-todo "-REFILE/!-WAITING-HOLD"
+                (tags-todo "-REFILE-MEETING/!-WAITING-HOLD"
                            ((org-agenda-overriding-header (concat "Standalone Tasks"
                                                                   (if bh/hide-scheduled-and-waiting-next-tasks
                                                                       ""
@@ -254,17 +254,17 @@
                             (org-agenda-todo-ignore-with-date bh/hide-scheduled-and-waiting-next-tasks)
                             (org-agenda-sorting-strategy
                              '(priority-down category-keep))))
-                (tags-todo "/!"
+                (tags-todo "-MEETING/!"
                            ((org-agenda-overriding-header "Stuck Projects")
                             (org-agenda-skip-function 'bh/skip-non-stuck-projects)
                             (org-agenda-sorting-strategy
                              '(priority-down category-keep))))
-                (tags-todo "/!-HOLD"
+                (tags-todo "-MEETING/!-HOLD"
                            ((org-agenda-overriding-header "Projects")
                             (org-agenda-skip-function 'bh/skip-non-projects)
                             (org-agenda-sorting-strategy
                              '(priority-down category-keep))))
-                (tags-todo "/!+WAITING|+HOLD"
+                (tags-todo "-MEETING/!+WAITING|+HOLD"
                            ((org-agenda-overriding-header (concat "Waiting and Postponed Tasks"
                                                                   (if bh/hide-scheduled-and-waiting-next-tasks
                                                                       ""
