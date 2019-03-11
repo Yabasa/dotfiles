@@ -161,6 +161,11 @@
   (setq cperl-invalid-face nil) ; Turns off underscore for trailing whitespace.
   (setq cperl-indent-level 4))
  
+;; YASnippet
+(use-package yasnippet
+  :ensure t
+  :config
+  (yas-global-mode t))
 
 ;; Load any local packages specific to this machine. Useful to loading work/home specific stuff.
 (if (file-exists-p "~/.emacs.d/local_init.el")
