@@ -180,11 +180,11 @@
 ;; This function extracts the todo keywords from org-todo-keywords into a simple list.
 (defun rm/get-org-todo-keywords ()
   (remove nil
-    (mapcar (lambda (x) (when (stringp x)
-                          (let ((case-fold-search nil))
-                            (when (string-match "[A-Z]+" x)
-                            (match-string 0 x)))))
-  (apply 'append org-todo-keywords))))
+          (mapcar (lambda (x) (when (stringp x)
+                                (let ((case-fold-search nil))
+                                  (when (string-match "[A-Z]+" x)
+                                    (match-string 0 x)))))
+                  (apply 'append org-todo-keywords))))
 
 ;; Add ID properties to all headlines that have a todo keyword in the current file which do not already have one.
 (defun rm/org-add-ids-to-headlines-in-file ()
