@@ -329,6 +329,24 @@
             (setq has-subtask t))))
       (and is-a-task has-subtask))))
 
+(defun rm/is-project-p ()
+  "Any task that has a todo keyword subtask and does not have any todo keyword parent tasks"
+  (save-restriction
+    (widen)
+    (let ((has-subtask)
+          (subtree-end (save-excursion (org-end-of-subtree t)))
+          (is-a-task (member (nth 2 (org-heading-components)) org-todo-keywords-1))
+          (this-task-point (save-excursion (line-beginning-position)))
+      (parent-task-point (save-excursion (bh/find-project-task))))
+      (save-excursion
+        (forward-line 1)
+        (while (and (not has-subtask)
+                    (< (point) subtree-end)
+                    (re-search-forward "^\*+ " subtree-end t))
+          (when (member (org-get-todo-state) org-todo-keywords-1)
+            (setq has-subtask t))))
+      (and is-a-task has-subtask (and (eq parent-task-point this-task-point))))))
+
 (defun bh/is-project-subtree-p ()
   "Any task with a todo keyword that is in a project subtree.
 Callers of this function already widen the buffer view."
@@ -396,7 +414,7 @@ Callers of this function already widen the buffer view."
   (save-restriction
     (widen)
     (let ((next-headline (save-excursion (or (outline-next-heading) (point-max)))))
-      (if (bh/is-project-p)
+      (if (rm/is-project-p)
           (let* ((subtree-end (save-excursion (org-end-of-subtree t)))
                  (has-next ))
             (save-excursion
@@ -415,7 +433,7 @@ Callers of this function already widen the buffer view."
   (save-restriction
     (widen)
     (let ((next-headline (save-excursion (or (outline-next-heading) (point-max)))))
-      (if (bh/is-project-p)
+      (if (rm/is-project-p)
           (let* ((subtree-end (save-excursion (org-end-of-subtree t)))
                  (has-next ))
             (save-excursion
@@ -436,9 +454,7 @@ Callers of this function already widen the buffer view."
         (widen)
         (let ((subtree-end (save-excursion (org-end-of-subtree t))))
           (cond
-           ((bh/is-project-p)
-            nil)
-           ((and (bh/is-project-subtree-p) (not (bh/is-task-p)))
+           ((rm/is-project-p)
             nil)
            (t
             subtree-end))))
@@ -462,7 +478,7 @@ Skip project and sub-project tasks, habits, and project related tasks."
     (widen)
     (let ((subtree-end (save-excursion (org-end-of-subtree t))))
       (cond
-       ((bh/is-project-p)
+       ((rm/is-project-p)
         subtree-end)
        ((org-is-habit-p)
         subtree-end)
@@ -480,7 +496,7 @@ Skip project and sub-project tasks, habits, and project related tasks."
        ((and bh/hide-scheduled-and-waiting-next-tasks
              (member "WAITING" (org-get-tags-at)))
         next-headline)
-       ((bh/is-project-p)
+       ((rm/is-project-p)
         next-headline)
        ((and (bh/is-task-p) (not (bh/is-project-subtree-p)))
         next-headline)
@@ -497,7 +513,7 @@ When not restricted, skip project and sub-project tasks, habits, and project rel
            (next-headline (save-excursion (or (outline-next-heading) (point-max))))
            (limit-to-project (marker-buffer org-agenda-restrict-begin)))
       (cond
-       ((bh/is-project-p)
+       ((rm/is-project-p)
         next-headline)
        ((org-is-habit-p)
         subtree-end)
@@ -518,7 +534,7 @@ Skip project and sub-project tasks, habits, and project related tasks."
     (widen)
     (let* ((subtree-end (save-excursion (org-end-of-subtree t))))
       (cond
-       ((bh/is-project-p)
+       ((rm/is-project-p)
         subtree-end)
        ((org-is-habit-p)
         subtree-end)
@@ -535,7 +551,7 @@ Skip project and sub-project tasks, habits, and loose non-project tasks."
     (let* ((subtree-end (save-excursion (org-end-of-subtree t)))
            (next-headline (save-excursion (or (outline-next-heading) (point-max)))))
       (cond
-       ((bh/is-project-p)
+       ((rm/is-project-p)
         next-headline)
        ((org-is-habit-p)
         subtree-end)
@@ -553,7 +569,7 @@ Skip project and sub-project tasks, habits, and loose non-project tasks."
     (widen)
     (let ((subtree-end (save-excursion (org-end-of-subtree t))))
       (cond
-       ((bh/is-project-p)
+       ((rm/is-project-p)
         subtree-end)
        ((org-is-habit-p)
         subtree-end)
@@ -628,7 +644,7 @@ Switch projects and subprojects from NEXT back to TODO"
            (bh/is-task-p))
       "NEXT")
      ((and (member (org-get-todo-state) (list "NEXT"))
-           (bh/is-project-p))
+           (rm/is-project-p))
       "TODO"))))
 
 (defun bh/find-project-task ()
