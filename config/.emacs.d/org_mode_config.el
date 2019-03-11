@@ -86,18 +86,20 @@
 
 ;; Define global tags for fast selection and also group them so only one can be picked at a time. Using the 4 types of work as described in The Phoenix Project.
 (setq org-tag-persistent-alist '((:startgroup . nil)
-                                ("BPROJ" . ?b)
-                                ("IPROJ" . ?i)
-                                ("PCHNG" . ?p)
-                                ("UPWRK" . ?u)
-                                ("ADMIN" . ?a)
-                                ("TRN" . ?t)
-                                (:endgroup . nil)
-                                ("INTRPT" . ?r)
-                                ("HABIT" . ?h)
-                                ("NOTE" . ?n)
-                                ("PRSNL" . ?s)
-                                ("EOB" . ?e)))
+				 ("BPROJ" . ?b)
+				 ("IPROJ" . ?i)
+				 ("PCHNG" . ?p)
+				 ("UPWRK" . ?u)
+				 ("ADMIN" . ?a)
+				 ("TRN" . ?t)
+				 (:endgroup . nil)
+				 ("INTRPT" . ?r)
+				 ("HABIT" . ?h)
+				 ("NOTE" . ?n)
+				 ("PRSNL" . ?s)
+				 ("FAB1" . ?f)
+				 ("MEETING" . ?m)
+				 ("EOB" . ?e)))
 
 ;; Adds triggers to TODO state changes. Right now it is just adding tags.
 ;; Not using this right now. Need to think about how i want to use tags.
