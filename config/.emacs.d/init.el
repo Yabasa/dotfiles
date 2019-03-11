@@ -102,6 +102,7 @@
   (setq linum-relative-current-symbol "")
   (add-hook 'prog-mode-hook 'linum-relative-mode))
 
+;; Help setup
 (use-package helm
   :ensure t
   :bind
