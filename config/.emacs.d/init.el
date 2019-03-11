@@ -142,7 +142,7 @@
   (global-origami-mode t)
   (add-to-list 'origami-parser-alist '(R-mode . origami-c-style-parser))
   (add-hook 'R-mode-hook (lambda () (interactive)
-                             (call-interactively 'origami-close-all-nodes)) t))
+                           (call-interactively 'origami-close-all-nodes)) t))
 
 ;; Use cperl-mode instead of perl-mode
 (use-package cperl-mode
