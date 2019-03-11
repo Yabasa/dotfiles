@@ -1,0 +1,98 @@
+#! /bin/sh
+# Take all the configs in the dotfiles repo and create symlinks from my home dir
+
+this_script_path=$( cd "$(dirname "$0")" ; pwd )
+
+# Create backup if one already exists and create soft link to this one
+link_file () {
+    # A bit of argument validation
+    if [ -z $1 ]; then
+        echo "No file path provided"
+        return 1
+    elif [ ! -e $1 ]; then
+        echo "The file $1 does not exist"
+        return 1
+    else
+        local file_path=$1
+        local file_name=$(basename $1)
+    fi
+
+    # If already exists as symlink, recreate the symlink. If a file back, up existing file and create as symlink
+    if [ -L ~/$file_name ]; then
+        echo "the current $file_name is a symlink, remapping symlink to point to dotfiles repo"
+        rm ~/$file_name
+        ln -s $file_path ~/$file_name
+    elif [ -f ~/$file_name ]; then
+        echo "$file_name already exists, making a backup before installing new one"
+        backed_up_name=$file_name"_"$(date +"%Y%m%d_%H%M%S")
+        mv ~/$file_name ~/$backed_up_name
+        echo "old $file_name now called "$backed_up_name
+        ln -s $file_path ~/$file_name
+        echo "installed new $file_name by making symlink to $file_name in dotfiles repo"
+    else
+        echo "no existing $file_name found in home directory, installing this one by making a symlink to $file_name in dotfiles repo"
+        ln -s $file_path ~/$file_name
+    fi
+    return 0
+}
+
+dir_backup_and_copy () {
+    # A bit of argument validation
+    if [ -z $1 ]; then
+        echo "No file path provided"
+        return 1
+    elif [ ! -d $1 ]; then
+        echo "The dir $1 does not exist"
+        return 1
+    else
+        local dir_path=$1
+        local dir_name=$(basename $1)
+    fi
+
+    # If dir alraedy exists, back it up and copy new dir
+    if [ -d ~/$dir_name ]; then
+        echo "$dir_name already exists, making a backup before installing new one"
+        backed_up_name=$dir_name"_"$(date +"%Y%m%d_%H%M%S")
+        mv ~/$dir_name ~/$backed_up_name
+        tar -cf ~/$backed_up_name".tar" ~/$backed_up_name && gzip ~/$backed_up_name".tar"
+        echo "old $dir_name now called $backed_up_name.tar.gz"
+        cp -r $dir_path ~/$dir_name
+        echo "copied $dir_name from dotfiles repo"
+    else
+        echo "no existing $dir_name found in home directory, copying from dotfiles repo"
+        cp -r $dir_path ~/$dir_name
+    fi
+    return 0
+
+}
+
+# Link all the files in config (except emacs and mintty cos they're special)
+for dotfile in `ls -A $this_script_path/config | egrep -v 'emacs|mintty'`; do
+    link_file $this_script_path/config/$dotfile
+done
+
+# Emacs is special because .init.el is housed in the .emacs.d dir where all the plugins are installed. Can't have the puglins getting saved to the git repo through a symlink
+dir_backup_and_copy $this_script_path/config/.emacs.d
+
+# .mintty is only needed if the environment is Cygwin
+if [ $( cat /proc/version | grep -c CYGWIN ) -eq 1 ]; then
+    link_file $this_script_path/config/.minttyrc
+fi
+
+# Install vim plugins using curl and git
+echo "creating directories for pathogen plugin"
+mkdir -p ~/.vim/autoload
+mkdir -p ~/.vim/bundle
+echo "installing pathogen plugin from Tim Popes web page"
+curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+
+echo "installing solarized colour scheme"
+if [ -d ~/.vim/bundle/vim-colors-solarized ]; then
+    echo "solarized color scheme already installed"
+    echo "  - running git pull to get latets version"
+    cd ~/.vim/bundle/vim-colors-solarized && git pull
+    cd -
+else
+    git clone https://github.com/altercation/vim-colors-solarized.git ~/.vim/bundle/vim-colors-solarized
+fi
+

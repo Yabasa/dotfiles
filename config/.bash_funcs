@@ -1,0 +1,21 @@
+# List only directories
+function ldr () {
+    if [ $1 ]; then
+        dir_path=$1
+    else
+        dir_path='.'
+    fi
+
+    ls -F $dir_path | grep / | tr -d /
+}
+
+# List only files
+function lf () {
+    if [ $1 ]; then
+        dir_path=$1
+    else
+        dir_path='.'
+    fi
+
+    ls -F $dir_path | grep -v /
+}
