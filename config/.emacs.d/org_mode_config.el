@@ -283,8 +283,8 @@
 
 ;; Enable display of the time grid so we can see the marker for the current time
 (setq org-agenda-time-grid (quote ((daily today remove-match)
-                                   "--------------------"
-                                   (0800 0900 1000 1100 1200 1300 1400 1500 1600 1700 1800))))
+                                   (0800 0900 1000 1100 1200 1300 1400 1500 1600 1700 1800)
+                                   "" "--------------------")))
 
 ;; Remove the agenda block separator lines (cygwin doesn't render correctly)
 (setq org-agenda-block-separator "")
