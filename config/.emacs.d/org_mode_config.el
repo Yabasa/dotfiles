@@ -112,24 +112,19 @@
 
 ;; Capture templates for: TODO tasks, notes, meetings, issues etc...
 (setq org-capture-templates
-      (quote (("t" "TODO" entry (file (substitute-in-file-name "$org_home/refile.org"))
-               "* TODO [#2] %? %^G\n:PROPERTIES:\n:REQUESTER: %^{prompt|Me}\n:OWNER: %^{prompt|Me}\n:Effort: %^{prompt}\n:CREATED: %U\n:END:\n:CLOCK:\n:END:" :clock-in t :clock-resume t)
-              ; I never really used respond. Commenting out for now. Will remove completely later if i don't feel the need to reinstate it.
-              ;("r" "Respond" entry (file "~/Organiser/refile.org")
-              ; "* TODO [#2] Respond to %^{prompt} about %^{prompt}\n:PROPERTIES:\n:REQUESTER: Me\n:OWNER: Me\n:CREATED: %U\n:END:\n:CLOCK:\n:END:" :clock-in t :clock-resume t :immediate-finish t)
-              ("m" "Meeting" entry (file (substitute-in-file-name "$org_home/refile.org"))
-               "* TODO [#2] Meeting with %^{prompt} about %^{prompt} :MEETING:%^G\nSCHEDULED: %^T\n:PROPERTIES:\n:ORGANISER: %^{prompt|Me}\n:Effort: %^{prompt|1:00}\n:WEB_CONF_LINK: \n:CREATED: %U\n:END:\n:CLOCK:\n:END:\n** Attendees\n- Me\n- \n** Agenda\n- \n** Minutes\n- " :clock-in t :clock-resume t)
-              ("l" "Training" entry (file (substitute-in-file-name "$org_home/refile.org"))
-              "* TODO [#2] Training with %^{prompt} on %^{prompt} :MEETING:TRN:%^G\nSCHEDULED: %^T\n:PROPERTIES:\n:ORGANISER: %^{prompt|Me}\n:Effort: %^{prompt|1:00}\n:WEB_CONF_LINK: \n:CREATED: %U\n:END:\n:CLOCK:\n:END:\n** Attendees\n- Me\n- \n** Training plan\n- " :clock-in t :clock-resume t)
-              ("i" "Interruption" entry (file (substitute-in-file-name "$org_home/interruptions.org"))
-               "* Talked with %? :INTRUPT:\n:PROPERTIES:\n:CREATED: %U\n:END:\n:CLOCK:\n:END:" :clock-in t :clock-resume t)
-              ("n" "Note" entry (file (substitute-in-file-name "$org_home/refile.org"))
-               "* %^{prompt} :NOTE:\n:PROPERTIES:\n:CREATED: %U\n:END:\n:CLOCK:\n:END:" :clock-in t :clock-resume t :immediate-finish t)
-              ("h" "Habit" entry (file (substitute-in-file-name "$org_home/refile.org"))
-               "* TODO [#2] %? :HABIT: \nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:Effort: %^{prompt}\n:END:\n:CLOCK:\n:END:" :clock-in t :clock-resume t)
-            )
-         )
-      )
+      (quote (("t" "TODO" entry (file "refile.org")
+	 "* TODO [#2] %? %^G\n:PROPERTIES:\n:REQUESTER: %^{prompt|Me}\n:OWNER: %^{prompt|Me}\n:Effort: %^{prompt}\n:CREATED: %U\n:END:\n:CLOCK:\n:END:" :clock-in t :clock-resume t)
+	("m" "Meeting" entry (file "refile.org")
+	 "* TODO [#2] Meeting with %^{prompt} about %^{prompt} :MEETING:%^G\nSCHEDULED: %^T\n:PROPERTIES:\n:ORGANISER: %^{prompt|Me}\n:Effort: %^{prompt|1:00}\n:WEB_CONF_LINK: \n:CREATED: %U\n:END:\n:CLOCK:\n:END:\n** Attendees\n- Me\n- \n** Agenda\n- \n** Minutes\n- " :clock-in t :clock-resume t)
+	("l" "Training" entry (file "refile.org")
+	 "* TODO [#2] Training with %^{prompt} on %^{prompt} :MEETING:TRN:%^G\nSCHEDULED: %^T\n:PROPERTIES:\n:ORGANISER: %^{prompt|Me}\n:Effort: %^{prompt|1:00}\n:WEB_CONF_LINK: \n:CREATED: %U\n:END:\n:CLOCK:\n:END:\n** Attendees\n- Me\n- \n** Training plan\n- " :clock-in t :clock-resume t)
+	("i" "Interruption" entry (file "interruptions.org")
+	 "* Talked with %? :INTRUPT:\n:PROPERTIES:\n:CREATED: %U\n:END:\n:CLOCK:\n:END:" :clock-in t :clock-resume t)
+	("n" "Note" entry (file ,(substitute-in-file-name "$org_home/refile.org"))
+	 "* %^{prompt} :NOTE:\n:PROPERTIES:\n:CREATED: %U\n:END:\n:CLOCK:\n:END:" :clock-in t :clock-resume t :immediate-finish t)
+	("h" "Habit" entry (file "refile.org")
+	 "* TODO [#2] %? :HABIT: \nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:Effort: %^{prompt}\n:END:\n:CLOCK:\n:END:" :clock-in t :clock-resume t))))
+      
 
 ;; Mark parent tasks as DONE if all children tasks are DONE
 (defun org-summary-todo (n-done n-not-done)
