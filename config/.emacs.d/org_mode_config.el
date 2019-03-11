@@ -86,20 +86,20 @@
 
 ;; Define global tags for fast selection and also group them so only one can be picked at a time. Using the 4 types of work as described in The Phoenix Project.
 (setq org-tag-persistent-alist '((:startgroup . nil)
-				 ("BPROJ" . ?b)
-				 ("IPROJ" . ?i)
-				 ("PCHNG" . ?p)
-				 ("UPWRK" . ?u)
-				 ("ADMIN" . ?a)
-				 ("TRN" . ?t)
-				 (:endgroup . nil)
-				 ("INTRPT" . ?r)
-				 ("HABIT" . ?h)
-				 ("NOTE" . ?n)
-				 ("PRSNL" . ?s)
-				 ("FAB1" . ?f)
-				 ("MEETING" . ?m)
-				 ("EOB" . ?e)))
+                                 ("BPROJ" . ?b)
+                                 ("IPROJ" . ?i)
+                                 ("PCHNG" . ?p)
+                                 ("UPWRK" . ?u)
+                                 ("ADMIN" . ?a)
+                                 ("TRN" . ?t)
+                                 (:endgroup . nil)
+                                 ("INTRPT" . ?r)
+                                 ("HABIT" . ?h)
+                                 ("NOTE" . ?n)
+                                 ("PRSNL" . ?s)
+                                 ("FAB1" . ?f)
+                                 ("MEETING" . ?m)
+                                 ("EOB" . ?e)))
 
 ;; Adds triggers to TODO state changes. Right now it is just adding tags.
 ;; Not using this right now. Need to think about how i want to use tags.
@@ -115,17 +115,17 @@
 ;; Capture templates for: TODO tasks, notes, meetings, issues etc...
 (setq org-capture-templates
       (quote (("t" "TODO" entry (file "refile.org")
-	 "* TODO [#2] %? %^G\n:PROPERTIES:\n:REQUESTER: %^{prompt|Me}\n:OWNER: %^{prompt|Me}\n:Effort: %^{prompt}\n:CREATED: %U\n:END:\n:CLOCK:\n:END:" :clock-in t :clock-resume t)
-	("m" "Meeting" entry (file "refile.org")
-	 "* TODO [#2] Meeting with %^{prompt} about %^{prompt} :MEETING:%^G\nSCHEDULED: %^T\n:PROPERTIES:\n:ORGANISER: %^{prompt|Me}\n:Effort: %^{prompt|1:00}\n:WEB_CONF_LINK: \n:CREATED: %U\n:END:\n:CLOCK:\n:END:\n** Attendees\n- Me\n- \n** Agenda\n- \n** Minutes\n- " :clock-in t :clock-resume t)
-	("l" "Training" entry (file "refile.org")
-	 "* TODO [#2] Training with %^{prompt} on %^{prompt} :MEETING:TRN:%^G\nSCHEDULED: %^T\n:PROPERTIES:\n:ORGANISER: %^{prompt|Me}\n:Effort: %^{prompt|1:00}\n:WEB_CONF_LINK: \n:CREATED: %U\n:END:\n:CLOCK:\n:END:\n** Attendees\n- Me\n- \n** Training plan\n- " :clock-in t :clock-resume t)
-	("i" "Interruption" entry (file "interruptions.org")
-	 "* Talked with %? :INTRUPT:\n:PROPERTIES:\n:CREATED: %U\n:END:\n:CLOCK:\n:END:" :clock-in t :clock-resume t)
-	("n" "Note" entry (file ,(substitute-in-file-name "$org_home/refile.org"))
-	 "* %^{prompt} :NOTE:\n:PROPERTIES:\n:CREATED: %U\n:END:\n:CLOCK:\n:END:" :clock-in t :clock-resume t :immediate-finish t)
-	("h" "Habit" entry (file "refile.org")
-	 "* TODO [#2] %? :HABIT: \nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:Effort: %^{prompt}\n:END:\n:CLOCK:\n:END:" :clock-in t :clock-resume t))))
+               "* TODO [#2] %? %^G\n:PROPERTIES:\n:REQUESTER: %^{prompt|Me}\n:OWNER: %^{prompt|Me}\n:Effort: %^{prompt}\n:CREATED: %U\n:END:\n:CLOCK:\n:END:" :clock-in t :clock-resume t)
+              ("m" "Meeting" entry (file "refile.org")
+               "* TODO [#2] Meeting with %^{prompt} about %^{prompt} :MEETING:%^G\nSCHEDULED: %^T\n:PROPERTIES:\n:ORGANISER: %^{prompt|Me}\n:Effort: %^{prompt|1:00}\n:WEB_CONF_LINK: \n:CREATED: %U\n:END:\n:CLOCK:\n:END:\n** Attendees\n- Me\n- \n** Agenda\n- \n** Minutes\n- " :clock-in t :clock-resume t)
+              ("l" "Training" entry (file "refile.org")
+               "* TODO [#2] Training with %^{prompt} on %^{prompt} :MEETING:TRN:%^G\nSCHEDULED: %^T\n:PROPERTIES:\n:ORGANISER: %^{prompt|Me}\n:Effort: %^{prompt|1:00}\n:WEB_CONF_LINK: \n:CREATED: %U\n:END:\n:CLOCK:\n:END:\n** Attendees\n- Me\n- \n** Training plan\n- " :clock-in t :clock-resume t)
+              ("i" "Interruption" entry (file "interruptions.org")
+               "* Talked with %? :INTRUPT:\n:PROPERTIES:\n:CREATED: %U\n:END:\n:CLOCK:\n:END:" :clock-in t :clock-resume t)
+              ("n" "Note" entry (file ,(substitute-in-file-name "$org_home/refile.org"))
+               "* %^{prompt} :NOTE:\n:PROPERTIES:\n:CREATED: %U\n:END:\n:CLOCK:\n:END:" :clock-in t :clock-resume t :immediate-finish t)
+              ("h" "Habit" entry (file "refile.org")
+               "* TODO [#2] %? :HABIT: \nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:Effort: %^{prompt}\n:END:\n:CLOCK:\n:END:" :clock-in t :clock-resume t))))
       
 
 ;; Mark parent tasks as DONE if all children tasks are DONE
