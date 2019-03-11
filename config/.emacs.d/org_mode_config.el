@@ -148,9 +148,8 @@
 ;;-----------------------------------------------------------
 ;; Task properties
 ;;-----------------------------------------------------------
-;; Not configuring Effort for now. I find it easier to just type in exactly the amount.
-(setq org-global-properties '(;("Effort_ALL". "0 0:05 0:10 0:15 0:20 0:30 0:40 0:50 1:00 2:00 3:00 4:00 6:00 8:00")
-  ("SEVERITY_ALL". "High Low")))
+;; Standardise task properties
+(setq org-global-properties '(("SEVERITY_ALL". "High Low")))
 
 ;; Add default task properites to a task without going through capture.
 (defun rm/add-default-properties (pom)
