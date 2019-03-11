@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: Mini project template
+# key: mp
+# --
+
+* TODO [#2] ${1:Project Name}
+** Project Charter
+*** Business Need
+insert purpose or justification
+*** Project Description
+insert summary of objectives, realted success criteria and high level requirements
+*** Project Drivers
+insert summary of critical assumptions, constraints, boundaries and risks
+*** Acceptance Criteria
+insert summary of how the project will be approved
+*** Milestones Schedule
+insert summary of major phase, deliverable or decision milestones
+*** Budget
+insert summary of project costs by major category
+*** Stakeholders
+insert list of major stakeholders, including their roles / expectations for involvement with the project
+** Work Breakdown Structure
+insert the work breakdown structure using regular org outline. first create WBS as a simple list of all tasks, then do estimation and scheduling
+** Risk Analysis
+insert list of risks and link to risk master list which is an excel file
+** Meetings
+keep a record of all meetings here along with minutes
+** Documentation, Notes and Research
+put in here documentation related to the project such as weekly reports, requirement prototypes, brainstorming session notes etc...
+** Project Management
+This is a catchall area for general project management tasks such as scheduling, reporting, documenting etc...
