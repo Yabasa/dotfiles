@@ -97,7 +97,6 @@
                                  ("HABIT" . ?h)
                                  ("NOTE" . ?n)
                                  ("PRSNL" . ?s)
-                                 ("FAB1" . ?f)
                                  ("MEETING" . ?m)
                                  ("EOB" . ?e)))
 
