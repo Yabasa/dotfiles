@@ -19,7 +19,7 @@ if [ ! $(type -t __git_ps1) ]; then
     fi
     source ~/bin/git-prompt.sh
 fi
-export PS1="\[\e[32m\]\u@\h\[\e[34m\]\w\[\e[31m\]\$(__git_ps1 \"(%s)\")\[\e[00m\]$ "
+export PS1="\[\e[32m\]\u@\h\[\e[00m\]:\[\e[34m\]\w\[\e[31m\]\$(__git_ps1 \"(%s)\")\[\e[00m\]$ "
 
 # LS_COLORS currently optimised for solarized color scheme
 export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=34:ow=34'
