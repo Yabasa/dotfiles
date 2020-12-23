@@ -13,9 +13,7 @@ export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 
 # Show git branch in command prompt
 if [ ! $(type -t __git_ps1) ]; then
-    if [ -e ~/bin/git-prompt.sh ]; then
-        dummy=1
-    else
+    if [ ! -e ~/bin/git-prompt.sh ]; then
         mkdir -p ~/bin
         curl -Sso ~/bin/git-prompt.sh https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
     fi
