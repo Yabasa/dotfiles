@@ -1,8 +1,8 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 
 # First source any private setup if found. Useful for not storing sensitive information on GitHub.
-if [ -e ~/.privrc ]; then
-    source ~/.privrc
+if [ -e ~/.privrc_pre ]; then
+    source ~/.privrc_pre
 fi
 
 # Don't put duplicate lines or lines starting with space in the history.
@@ -41,7 +41,7 @@ fi
 
 # General bash variables
 # $MY_WORK_DIR: Can change this at any point so that the mwd alias (cd $MY_WORK_DIR) will redirect to this dir.
-# Only set to default value if it's not already set previously e.g. in .privrc
+# Only set to default value if it's not already set previously e.g. in .privrc_pre
 if [ ! $MY_WORK_DIR ]; then
     export MY_WORK_DIR=~/dotfiles
 fi
@@ -55,3 +55,9 @@ fi
 if [ -f ~/.bash_funcs ]; then
     source ~/.bash_funcs
 fi
+
+# Source any privite setup that needs to be run after everything else
+if [ -f ~/.privrc_post ]; then
+    source ~/.privrc_post
+fi
+
