@@ -25,11 +25,7 @@ export PS1="\[\e[32m\]\u@\h\[\e[00m\]:\[\e[34m\]\w\[\e[31m\]\$(__git_ps1 \"(%s)\
 export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=34:ow=34'
 
 # *nix system specific setup
-if [ $( cat /proc/version | grep -c Microsoft ) -eq 1 ]; then
-    export win_home=/mnt/c/Users/trebo
-    alias wh='cd $win_home'
-    export org_home=$win_home/Dropbox/organiser
-elif [ $( cat /proc/version | grep -c CYGWIN ) -eq 1 ]; then
+if [ $( cat /proc/version | grep -c CYGWIN ) -eq 1 ]; then
     export win_home=/cygdrive/u
     alias wh='cd $win_home'
     export org_home=$win_home/organiser
