@@ -20,4 +20,7 @@ alias gs='git status'
 alias gd='git diff'
 alias gdt='git difftool'
 alias ga='git add'
+alias nvimdiff='nvim -d'
 
+# Application overrides
+alias vim=nvim

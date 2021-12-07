@@ -1,7 +1,5 @@
 [core]
     editor = vim
-[commit]
-    template = ~/.git_commit_template
 [color]
     ui = true
 [diff]
