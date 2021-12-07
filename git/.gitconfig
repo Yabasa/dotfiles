@@ -1,9 +1,9 @@
 [core]
-    editor = vim
+    editor = nvim
 [color]
     ui = true
 [diff]
-    tool = vimdiff
+    tool = nvimdiff
 [difftool]
     prompt = false
 [push]
