@@ -15,7 +15,7 @@ alias psg='ps -ef | grep -v "grep \-\-color=auto" | grep '
 # Git shortcuts
 alias gc='git commit -v'
 alias gca='git commit -v -a'
-alias gl='git log --oneline --all --graph --decorate -20'
+alias gl='git log --graph --abbrev-commit --decorate --format=format:"%C(cyan)%h%C(reset) - %an - %C(bold red)(%ar)%C(reset) %C(bold cyan)%s%C(reset) %C(auto)%d%C(reset)" --all -20'
 alias gs='git status'
 alias gd='git diff'
 alias gdt='git difftool'
