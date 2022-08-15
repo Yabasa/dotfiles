@@ -13,6 +13,9 @@
     nnoremap / /\v
     nnoremap ? ?\v
 
+    " Must be defined early in config before vim-perl is loaded
+    let perl_fold=1
+
 " }}}
 
 
@@ -29,9 +32,6 @@
     " Telescope
     Plug 'nvim-telescope/telescope.nvim'
     Plug 'nvim-telescope/telescope-fzf-native.nvim', {'do': 'make' }
-
-    " Icons
-    Plug 'kyazdani42/nvim-web-devicons'
 
     " Status line
     Plug 'hoob3rt/lualine.nvim'
@@ -52,6 +52,9 @@
     " Useful stuff
     Plug 'tpope/vim-surround'
     Plug 'lewis6991/gitsigns.nvim'
+    Plug 'windwp/nvim-autopairs'
+    Plug 'numToStr/Comment.nvim'
+    Plug 'voldikss/vim-floaterm'
 
     call plug#end()
 
@@ -91,15 +94,15 @@
 
 " view ----------------------------------------------------------------------{{{
 
-    set background=light      " set background to dark theme
+    set background=dark       " set background to dark theme
     colorscheme NeoSolarized  " set the color scheme
 
     set number                " show the absolute line number
     set relativenumber        " show the relative line numbers
 
-    set signcolumn=number     " put the notification signs in the same columns as the line numbers
-
     set foldlevelstart=0      " close all folds on open
+    set foldmethod=expr
+    set foldexpr=nvim_treesitter#foldexpr()
 
     " toggle fold
     nnoremap <space> za
@@ -116,6 +119,13 @@
     " set focus to the opened split
     set splitbelow
     set splitright
+
+    " Have only one status line at the bottom
+    set laststatus=3
+
+    " Floating terminal
+    nnoremap <leader>t :FloatermToggle<cr>
+    tnoremap <leader>q <C-\><C-n>:q<cr>
 
 " }}}
 
@@ -146,6 +156,7 @@
             " comment and uncomment lines
             autocmd FileType perl nnoremap <buffer> <localleader>c mqI#<esc>`q
             autocmd FileType perl nnoremap <buffer> <localleader>u mq:s/^\(\s*\)#\=/\1<cr>`q
+
             " folding
             autocmd FileType perl setlocal foldlevel=1
 
