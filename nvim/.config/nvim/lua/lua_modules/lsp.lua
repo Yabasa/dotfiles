@@ -41,3 +41,6 @@ for _, lsp in ipairs(servers) do
         on_attach = on_attach,
     }
 end
+
+-- Autoformat on save
+vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()]]

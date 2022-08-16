@@ -33,16 +33,21 @@
     Plug 'nvim-telescope/telescope.nvim'
     Plug 'nvim-telescope/telescope-fzf-native.nvim', {'do': 'make' }
 
+    " Icons
+    Plug 'kyazdani42/nvim-web-devicons'
+
     " Status line
     Plug 'hoob3rt/lualine.nvim'
 
     " LSP
     Plug 'neovim/nvim-lspconfig'
 
+    " Snippets
+    Plug 'L3MON4D3/LuaSnip'
+
     " Auto complete
     Plug 'hrsh7th/nvim-cmp'
     Plug 'hrsh7th/cmp-nvim-lsp'
-    Plug 'L3MON4D3/LuaSnip'
     Plug 'saadparwaiz1/cmp_luasnip'
     Plug 'onsails/lspkind-nvim'
 
@@ -50,11 +55,13 @@
     Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 
     " Useful stuff
-    Plug 'tpope/vim-surround'
     Plug 'lewis6991/gitsigns.nvim'
+    Plug 'tpope/vim-surround'
     Plug 'windwp/nvim-autopairs'
-    Plug 'numToStr/Comment.nvim'
     Plug 'voldikss/vim-floaterm'
+    Plug 'tpope/vim-projectionist'
+    Plug 'numToStr/Comment.nvim'
+
 
     call plug#end()
 
