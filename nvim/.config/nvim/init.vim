@@ -101,7 +101,7 @@
 
 " view ----------------------------------------------------------------------{{{
 
-    set background=dark       " set background to dark theme
+    set background=light      " set background to dark theme
     colorscheme NeoSolarized  " set the color scheme
 
     set number                " show the absolute line number
