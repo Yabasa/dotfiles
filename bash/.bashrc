@@ -9,7 +9,7 @@ fi
 HISTCONTROL=ignoreboth
 
 # Make sure the standard bin dirs are in the PATH
-export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
+export PATH="$HOME/bin:$HOME/local/bin:$PATH"
 
 # Show git branch in command prompt
 if [ ! $(type -t __git_ps1) ]; then
