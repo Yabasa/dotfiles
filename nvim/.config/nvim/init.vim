@@ -53,6 +53,7 @@
 
     " Treesitter
     Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
+    Plug 'nvim-treesitter/playground'
 
     " Useful stuff
     Plug 'lewis6991/gitsigns.nvim'
