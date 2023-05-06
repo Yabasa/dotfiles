@@ -1,6 +1,8 @@
 local treesitter = require('nvim-treesitter.configs')
 
 treesitter.setup {
+    ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "elm", "python" },
+
     highlight = {
         enable = true
     }
