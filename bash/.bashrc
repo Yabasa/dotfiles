@@ -40,6 +40,9 @@ if [ ! $MY_WORK_DIR ]; then
     export MY_WORK_DIR=~/dotfiles
 fi
 
+# Configure Neovim to use the default config
+export NVIM_APPNAME=nvim_default
+
 # Alias definitions
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases

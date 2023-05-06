@@ -21,7 +21,7 @@
 
 " pulgins -------------------------------------------------------------------{{{
 
-    call plug#begin('~/.config/nvim/plugged')
+    call plug#begin('~/.config/nvim_default/plugged')
 
     " Color scheme
     Plug 'overcache/NeoSolarized'
