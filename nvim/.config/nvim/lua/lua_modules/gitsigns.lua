@@ -1,7 +1,7 @@
 -- NOTE: taken directly from the gitsigns github README
 
 require('gitsigns').setup{
-	current_line_blame = true,
+	current_line_blame = false,
 	current_line_blame_opts = {
 		virt_text_pos = 'eol'
 	},
