@@ -48,6 +48,7 @@
     " Auto complete
     Plug 'hrsh7th/nvim-cmp'
     Plug 'hrsh7th/cmp-nvim-lsp'
+    Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
     Plug 'hrsh7th/cmp-path'
     Plug 'saadparwaiz1/cmp_luasnip'
     Plug 'onsails/lspkind-nvim'
@@ -55,6 +56,10 @@
     " Treesitter
     Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
     Plug 'nvim-treesitter/playground'
+
+    " Mason
+    Plug 'williamboman/mason.nvim', { 'do': ':MasonUpdate' }
+    Plug 'williamboman/mason-lspconfig.nvim'
 
     " Useful stuff
     Plug 'lewis6991/gitsigns.nvim'
@@ -64,6 +69,9 @@
     Plug 'tpope/vim-projectionist'
     Plug 'numToStr/Comment.nvim'
 
+    " Experimental stuff
+    Plug 'nvim-neotest/neotest'
+    Plug 'nvim-neotest/neotest-python'
 
     call plug#end()
 

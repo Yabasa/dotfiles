@@ -7,6 +7,3 @@ require('lua_modules/gitsigns')
 require('lua_modules/luasnip')
 require('lua_modules/autopairs')
 require('lua_modules/comment')
-
-
-
