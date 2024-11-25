@@ -16,17 +16,25 @@
         url = "github:nix-community/nixvim/nixos-24.05";
         inputs.nixpkgs.follows = "nixpkgs";
       };
+
+      roc = {
+        url = "github:roc-lang/roc";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
+
     };
 
   outputs =
     { nixpkgs
     , home-manager
     , nixvim
+    , roc
     , ...
     }@inputs:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      rocPkgs = roc.packages.${system};
     in
     {
       homeConfigurations = {
@@ -36,6 +44,9 @@
             ./home.nix
             nixvim.homeManagerModules.nixvim
           ];
+          extraSpecialArgs = {
+            rocPkgs = rocPkgs;
+          };
         };
       };
     };

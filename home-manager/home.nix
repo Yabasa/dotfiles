@@ -1,4 +1,4 @@
-{pkgs, ...}:
+{pkgs, rocPkgs, ...}:
 {
   home.username = "treb";
   home.homeDirectory = "/home/treb";
@@ -6,6 +6,7 @@
   programs.home-manager.enable = true;
   home.packages = with pkgs; [
     # hello
+    rocPkgs.cli
   ];
 
   programs.git.enable = true;

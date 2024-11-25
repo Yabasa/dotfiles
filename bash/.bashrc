@@ -41,7 +41,8 @@ if [ ! $MY_WORK_DIR ]; then
 fi
 
 # Configure Neovim to use the default config
-export NVIM_APPNAME=nvim_default
+#Commenting out for now while experimenting with Nixvim
+#export NVIM_APPNAME=nvim_default
 
 # Alias definitions
 if [ -f ~/.bash_aliases ]; then

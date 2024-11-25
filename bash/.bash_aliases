@@ -32,4 +32,4 @@ alias ep='npx elm-pages'
 alias epa='npx elm-pages run AddRoute'
 
 # Nix stuff
-alias hmr='home-manager switch --flake $HOME/.config/home-manager'
+alias hmr='home-manager switch --flake $HOME/dotfiles/home-manager'
