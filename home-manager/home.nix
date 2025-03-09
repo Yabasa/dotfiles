@@ -2,11 +2,16 @@
 {
   home.username = "treb";
   home.homeDirectory = "/home/treb";
-  home.stateVersion = "22.11";
+  home.stateVersion = "24.11";
   programs.home-manager.enable = true;
   home.packages = with pkgs; [
     # hello
     rocPkgs.cli
+    rocPkgs.lang-server
+    exercism
+    nodejs
+    elmPackages.elm
+    elmPackages.lamdera
   ];
 
   programs.git.enable = true;
@@ -20,10 +25,57 @@
 
     luaLoader.enable = true;
 
-    extraPlugins = [ pkgs.vimPlugins.NeoSolarized ];
-    colorscheme = "NeoSolarized";
+    extraPlugins = [ pkgs.vimPlugins.nvim-solarized-lua ];
+    colorscheme = "solarized";
 
-    extraConfigLua = ''vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format({ async = false })]]'';
+    extraConfigLua = ''
+    vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format({ async = false })]]
+
+    -- make .roc files have the correct filetype
+    vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+      pattern = { "*.roc" },
+      command = "set filetype=roc",
+    })
+
+    -- add roc tree-sitter
+    local parsers = require("nvim-treesitter.parsers").get_parser_configs()
+
+    parsers.roc = {
+      install_info = {
+        url = "https://github.com/faldor20/tree-sitter-roc",
+        files = { "src/parser.c", "src/scanner.c" },
+      },
+    }
+    do
+        local __lspServers = { { ["name"] = "roc_ls" } }
+        local __lspOnAttach = function(client, bufnr) end
+        local __lspCapabilities = function()
+            capabilities = vim.lsp.protocol.make_client_capabilities()
+
+            return capabilities
+        end
+
+        local __setup = {
+            on_attach = __lspOnAttach,
+            capabilities = __lspCapabilities(),
+        }
+
+        for i, server in ipairs(__lspServers) do
+            if type(server) == "string" then
+                require("lspconfig")[server].setup(__setup)
+            else
+                local options = server.extraOptions
+
+                if options == nil then
+                    options = __setup
+                else
+                    options = vim.tbl_extend("keep", options, __setup)
+                end
+
+                require("lspconfig")[server.name].setup(options)
+            end
+        end
+    end'';
 
     plugins = {
       lsp = {
@@ -48,8 +100,8 @@
         };
 
         servers = {
-          lua-ls.enable = true;
-          nil-ls.enable = true;
+          lua_ls.enable = true;
+          nil_ls.enable = true;
           elmls.enable = true;
         };
       };
@@ -57,9 +109,10 @@
 
     plugins.lualine = {
       enable = true;
-      theme = "solarized_light";
+      settings.options.theme = "solarized";
     };
     plugins.gitsigns.enable = true;
+    plugins.web-devicons.enable = true;
     plugins.telescope = {
     	enable = true;
         extensions.fzf-native.enable = true;
@@ -70,6 +123,7 @@
             "<leader>fh" = "help_tags";
         };
     };
+    plugins.treesitter.enable = true;
 
     opts = {
       # Line numbers
@@ -93,7 +147,6 @@
       incsearch = true;
       showmode = false;
       background = "light";
-
     };
 
     keymaps = [
